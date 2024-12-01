@@ -111,7 +111,7 @@ processResources {
 
 	// Replace stuff in mods.toml, nothing else
 	filesMatching('META-INF/mods.toml') { // Replace with your files
-		expand([version     : modversion,
+		expand([modversion: modversion,
 		        mcversion   : version_minecraft,
 		        forgeversion: forgeversion,
 		        modid       : id,
@@ -137,11 +137,11 @@ def processReferenceJava = tasks.register('processReferenceJava', Copy) {
 	into "$buildDir/generated/sources/reference"
 
 	include 'Reference.java' // Target only Reference.java
-	expand([version     : modversion,
-	        mcversion   : version_minecraft,
-	        forgeversion: forgeversion,
-	        modid       : id,
-	        modname     : modname])
+	expand([modversion   : modversion,
+	        mcversion    : version_minecraft,
+	        version_forge: version_forge,
+	        modid        : id,
+	        modname      : modname])
 }
 
 // Ensure Reference.java is included in compilation along with other sources

@@ -1,13 +1,13 @@
 package com.github.lunatrius.core.exceptions;
 
-import net.minecraft.util.text.translation.I18n;
+import net.minecraft.util.text.TranslationTextComponent;
 
 public class LocalizedException extends Exception {
-    public LocalizedException(final String format) {
-        super(I18n.translateToLocal(format));
-    }
+	public LocalizedException(final String format) {
+		super(String.valueOf(new TranslationTextComponent(format)));
+	}
 
-    public LocalizedException(final String format, final Object... arguments) {
-        super(I18n.translateToLocalFormatted(format, arguments));
-    }
+	public LocalizedException(final String format, final Object... arguments) {
+		super(String.valueOf(new TranslationTextComponent(format, arguments)));
+	}
 }

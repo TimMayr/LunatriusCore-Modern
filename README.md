@@ -17,9 +17,9 @@ The Java JDK is used to compile LunatriusCore.
     * [Windows/Mac download link](http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html). Scroll down, accept the `Oracle Binary Code License Agreement for Java SE`, and download it (if you have a 64-bit OS, please download the 64-bit version).
     * Linux: Installation methods for certain popular flavors of Linux are listed below. If your distribution is not listed, follow the instructions specific to your package manager or install it manually [here](http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html).
         * Gentoo: `emerge dev-java/oracle-jdk-bin`
-        * Archlinux: `pacman -S jdk7-openjdk`
-        * Ubuntu/Debian: `apt-get install openjdk-7-jdk`
-        * Fedora: `yum install java-1.7.0-openjdk`
+        * Archlinux: `pacman -S jdk8-openjdk`
+        * Ubuntu/Debian: `apt-get install openjdk-8-jdk`
+        * Fedora: `yum install java-1.8.0-openjdk`
 2. Set up the environment.
     * Windows: Set environment variables for the JDK.
         1. Go to `Control Panel\System and Security\System`, and click on `Advanced System Settings` on the left-hand side.
@@ -52,13 +52,12 @@ This section assumes that you're using the command-line version of Git.
 ***
 
 #### Compile LunatriusCore
-1. Execute `gradlew setupDevWorkspace`. This sets up Forge and downloads the necessary libraries to build LunatriusCore. This might take some time, be patient.
-    * You will generally only have to do this once until the Forge version in `gradle.properties` changes.
-2. Execute `gradlew build`. If you did everything right, `BUILD SUCCESSFUL` will be displayed after it finishes. This should be relatively quick.
-    * If you see `BUILD FAILED`, check the error output (it should be right around `BUILD FAILED`), fix everything (if possible), and try again.
-3. Go to `mcdev\LunatriusCore\build\libs`.
+1. Import the gradle project in an ide like intellij
+2. Run the genIntellij/Eclipse/VSCoderuns task corresponding to your ide
+3. Run the build task
+4. Go to `mcdev\LunatriusCore\build\libs`.
     * You should see a `.jar` file named `LunatriusCore-#.#.#-#.#.#.#-universal.jar`.
-4. Copy the jar into your Minecraft mods folder, and you are done!
+5. Copy the jar into your Minecraft mods folder, and you are done!
 
 #### Updating Your Repository
 In order to get the most up-to-date builds, you'll have to periodically update your local repository.

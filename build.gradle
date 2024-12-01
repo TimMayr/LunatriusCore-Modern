@@ -21,10 +21,10 @@ apply plugin: "net.minecraftforge.gradle"
 
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8'
 
-project.build = System.getenv().BUILD_NUMBER ?: 'git'
-modversion = "${project.version_major}.${project.version_minor}.${project.version_micro}.${build}"
+def modversion = "${project.version_major}.${project.version_minor}.${project.version_micro}"
 
-version = "${project.version_minecraft}-${project.version_forge}"
+def fullyQualifiedForgeVersion = "${project.version_minecraft}-${project.version_forge}"
+version = "${project.version_minecraft}-${modversion}"
 
 repositories {
 	maven {
@@ -33,7 +33,7 @@ repositories {
 }
 
 dependencies {
-	minecraft "net.minecraftforge:forge:${version}"
+	minecraft "net.minecraftforge:forge:${fullyQualifiedForgeVersion}"
 }
 
 minecraft {
@@ -95,9 +95,9 @@ jar {
 	manifest {
 		attributes(["Specification-Title"     : project.name,
 		            "Specification-Vendor"    : project.group,
-		            "Specification-Version"   : modversion,
+		            "Specification-Version" : version,
 		            "Implementation-Title"    : project.name,
-		            "Implementation-Version"  : modversion,
+		            "Implementation-Version": version,
 		            "Implementation-Vendor"   : project.group,
 		            "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
 		            "Signing-Fingerprint"     : project.hasProperty('signSHA1') ? project.findProperty('signSHA1') : "unsigned"])
@@ -107,7 +107,7 @@ jar {
 processResources {
 	// This will ensure that this task is redone when the versions change.
 	duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-	inputs.properties(version: modversion, mcversion: version_minecraft, forgeversion: forgeversion, modid: id, modname: modname)
+	inputs.properties(version: version, mcversion: version_minecraft, forgeversion: forgeversion, modid: id, modname: modname)
 
 	// Replace stuff in mods.toml, nothing else
 	filesMatching('META-INF/mods.toml') { // Replace with your files

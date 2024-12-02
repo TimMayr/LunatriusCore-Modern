@@ -95,9 +95,9 @@ jar {
 	manifest {
 		attributes(["Specification-Title"     : project.name,
 		            "Specification-Vendor"    : project.group,
-		            "Specification-Version" : version,
+		            "Specification-Version"   : version,
 		            "Implementation-Title"    : project.name,
-		            "Implementation-Version": version,
+		            "Implementation-Version"  : version,
 		            "Implementation-Vendor"   : project.group,
 		            "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
 		            "Signing-Fingerprint"     : project.hasProperty('signSHA1') ? project.findProperty('signSHA1') : "unsigned"])
@@ -111,7 +111,7 @@ processResources {
 
 	// Replace stuff in mods.toml, nothing else
 	filesMatching('META-INF/mods.toml') { // Replace with your files
-		expand([modversion: modversion,
+		expand([modversion  : modversion,
 		        mcversion   : version_minecraft,
 		        forgeversion: forgeversion,
 		        modid       : id,

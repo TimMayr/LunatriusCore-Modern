@@ -17,8 +17,8 @@ public class NumericFieldWidget extends Button {
 	private int maximum = Integer.MAX_VALUE;
 	private boolean wasFocused = false;
 
-	public NumericFieldWidget( FontRenderer fontRenderer,  int x,  int y) {
-		this(fontRenderer, x, y, 100, 20, (button) -> {});
+	public NumericFieldWidget( FontRenderer fontRenderer,  int x,  int y, Button.IPressable onPress) {
+		this(fontRenderer, x, y, 100, 20, onPress);
 	}
 
 	public NumericFieldWidget( FontRenderer fontRenderer,  int x,  int y,  int width,
@@ -34,8 +34,8 @@ public class NumericFieldWidget extends Button {
 		setValue(DEFAULT_VALUE);
 	}
 
-	public NumericFieldWidget( FontRenderer fontRenderer,  int x,  int y,  int width) {
-		this(fontRenderer, x, y, width, 20, (button) -> {});
+	public NumericFieldWidget( FontRenderer fontRenderer,  int x,  int y,  int width, Button.IPressable onPress) {
+		this(fontRenderer, x, y, width, 20, onPress);
 	}
 
 	@Override

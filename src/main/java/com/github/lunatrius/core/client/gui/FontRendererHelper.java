@@ -3,18 +3,18 @@ package com.github.lunatrius.core.client.gui;
 import net.minecraft.client.gui.FontRenderer;
 
 public class FontRendererHelper {
-	public static void drawLeftAlignedString(final FontRenderer fontRenderer, final String str, final int x,
-	                                         final int y, final int color) {
+	public static void drawLeftAlignedString( FontRenderer fontRenderer,  String str,  int x,
+	                                          int y,  int color) {
 		fontRenderer.drawStringWithShadow(str, x, y, color);
 	}
 
-	public static void drawCenteredString(final FontRenderer fontRenderer, final String str, final int x, final int y,
-	                                      final int color) {
+	public static void drawCenteredString( FontRenderer fontRenderer,  String str,  int x,  int y,
+	                                       int color) {
 		fontRenderer.drawStringWithShadow(str, x - (float) fontRenderer.getStringWidth(str) / 2, y, color);
 	}
 
-	public static void drawRightAlignedString(final FontRenderer fontRenderer, final String str, final int x,
-	                                          final int y, final int color) {
+	public static void drawRightAlignedString( FontRenderer fontRenderer,  String str,  int x,
+	                                           int y,  int color) {
 		fontRenderer.drawStringWithShadow(str, x - fontRenderer.getStringWidth(str), y, color);
 	}
 

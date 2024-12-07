@@ -1,6 +1,5 @@
 package com.github.lunatrius.core.client.gui;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.widget.TextFieldWidget;
 import net.minecraft.client.gui.widget.button.Button;
@@ -18,13 +17,13 @@ public class NumericFieldWidget extends Button {
 	private int maximum = Integer.MAX_VALUE;
 	private boolean wasFocused = false;
 
-	public NumericFieldWidget(final FontRenderer fontRenderer, final int id, final int x, final int y) {
-		this(fontRenderer, id, x, y, 100, 20);
+	public NumericFieldWidget( FontRenderer fontRenderer,  int x,  int y) {
+		this(fontRenderer, x, y, 100, 20, (button) -> {});
 	}
 
-	public NumericFieldWidget(final FontRenderer fontRenderer, final int id, final int x, final int y, final int width,
-	                          final int height) {
-		super(0, 0, width, height, "", (event) -> {});
+	public NumericFieldWidget( FontRenderer fontRenderer,  int x,  int y,  int width,
+	                           int height, Button.IPressable onPress) {
+		super(0, 0, width, height, "", onPress);
 		this.guiTextField =
 				new TextFieldWidget(fontRenderer, x + 1, y + 1, width - BUTTON_WIDTH * 2 - 2, height - 2, "");
 
@@ -35,9 +34,8 @@ public class NumericFieldWidget extends Button {
 		setValue(DEFAULT_VALUE);
 	}
 
-	public NumericFieldWidget(final FontRenderer fontRenderer, final int id, final int x, final int y,
-	                          final int width) {
-		this(fontRenderer, id, x, y, width, 20);
+	public NumericFieldWidget( FontRenderer fontRenderer,  int x,  int y,  int width) {
+		this(fontRenderer, x, y, width, 20, (button) -> {});
 	}
 
 	@Override
@@ -72,7 +70,7 @@ public class NumericFieldWidget extends Button {
 	}
 
 	public int getValue() {
-		final String text = this.guiTextField.getText();
+		 String text = this.guiTextField.getText();
 
 		if (text.isEmpty() || text.equals("-")) {
 			return DEFAULT_VALUE;
@@ -94,9 +92,7 @@ public class NumericFieldWidget extends Button {
 		return this.guiTextField.isFocused();
 	}
 
-	public void mouseClicked(final int x, final int y, final int action) {
-		final Minecraft minecraft = Minecraft.getInstance();
-
+	public void mouseClicked( int x,  int y,  int action) {
 		this.guiTextField.mouseClicked(x, y, action);
 
 		if (this.guiButtonInc.mouseClicked(x, y, action)) {
@@ -109,17 +105,17 @@ public class NumericFieldWidget extends Button {
 	}
 
 	@Override
-	public boolean charTyped(final char character, final int code) {
+	public boolean charTyped( char character,  int code) {
 		if (!this.guiTextField.isFocused()) {
 			return false;
 		}
 
-		final int cursorPositionOld = this.guiTextField.getCursorPosition();
+		 int cursorPositionOld = this.guiTextField.getCursorPosition();
 
 		this.guiTextField.charTyped(character, code);
 
 		String text = this.guiTextField.getText();
-		final int cursorPositionNew = this.guiTextField.getCursorPosition();
+		 int cursorPositionNew = this.guiTextField.getCursorPosition();
 
 		if (text.isEmpty() || text.equals("-")) {
 			return true;
@@ -147,7 +143,7 @@ public class NumericFieldWidget extends Button {
 			this.previous = text;
 
 			return true;
-		} catch (final NumberFormatException nfe) {
+		} catch ( NumberFormatException nfe) {
 			this.guiTextField.setText(this.previous);
 			this.guiTextField.setCursorPosition(cursorPositionOld);
 		}
@@ -160,7 +156,7 @@ public class NumericFieldWidget extends Button {
 		this.guiTextField.tick();
 	}
 
-	public void setPosition(final int x, final int y) {
+	public void setPosition( int x,  int y) {
 		this.guiTextField.x = x + 1;
 		this.guiTextField.y = y + 1;
 		this.guiButtonInc.x = x + width - BUTTON_WIDTH * 2;
@@ -169,7 +165,7 @@ public class NumericFieldWidget extends Button {
 		this.guiButtonDec.y = y;
 	}
 
-	public void setActive(final boolean enabled) {
+	public void setActive( boolean enabled) {
 		this.active = enabled;
 		this.guiTextField.setEnabled(enabled);
 		this.guiButtonInc.active = enabled;
@@ -180,7 +176,7 @@ public class NumericFieldWidget extends Button {
 		return this.minimum;
 	}
 
-	public void setMinimum(final int minimum) {
+	public void setMinimum( int minimum) {
 		this.minimum = minimum;
 	}
 
@@ -188,7 +184,7 @@ public class NumericFieldWidget extends Button {
 		return this.maximum;
 	}
 
-	public void setMaximum(final int maximum) {
+	public void setMaximum( int maximum) {
 		this.maximum = maximum;
 	}
 }

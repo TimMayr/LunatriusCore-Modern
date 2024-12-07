@@ -17,7 +17,7 @@ public class GeometryTessellator extends Tessellator {
 		this(0x200000);
 	}
 
-	public GeometryTessellator(final int size) {
+	public GeometryTessellator( int size) {
 		super(size);
 	}
 
@@ -29,33 +29,33 @@ public class GeometryTessellator extends Tessellator {
 		return instance;
 	}
 
-	public static void setStaticDelta(final double delta) {
+	public static void setStaticDelta( double delta) {
 		deltaS = delta;
 	}
 
-	public static void drawCuboid(final BufferBuilder buffer, final BlockPos pos, final int sides, final int argb) {
+	public static void drawCuboid( BufferBuilder buffer,  BlockPos pos,  int sides,  int argb) {
 		drawCuboid(buffer, pos, pos, sides, argb);
 	}
 
-	public static void drawCuboid(final BufferBuilder buffer, final BlockPos begin, final BlockPos end,
-	                              final int sides,
-	                              final int argb) {
+	public static void drawCuboid( BufferBuilder buffer,  BlockPos begin,  BlockPos end,
+	                               int sides,
+	                               int argb) {
 		drawCuboid(buffer, begin, end, sides, argb, GeometryTessellator.deltaS);
 	}
 
-	private static void drawCuboid(final BufferBuilder buffer, final BlockPos begin, final BlockPos end,
-	                               final int sides, final int argb, final double delta) {
+	private static void drawCuboid( BufferBuilder buffer,  BlockPos begin,  BlockPos end,
+	                                int sides,  int argb,  double delta) {
 		if (buffer.getCurrentElement().getType().getGlConstant() == -1 || sides == 0) {
 			return;
 		}
 
 
-		final double x0 = begin.getX() - delta;
-		final double y0 = begin.getY() - delta;
-		final double z0 = begin.getZ() - delta;
-		final double x1 = end.getX() + 1 + delta;
-		final double y1 = end.getY() + 1 + delta;
-		final double z1 = end.getZ() + 1 + delta;
+		 double x0 = begin.getX() - delta;
+		 double y0 = begin.getY() - delta;
+		 double z0 = begin.getZ() - delta;
+		 double x1 = end.getX() + 1 + delta;
+		 double y1 = end.getY() + 1 + delta;
+		 double z1 = end.getZ() + 1 + delta;
 
 		switch (buffer.getCurrentElement().getType().getGlConstant()) {
 			case GL11.GL_QUADS:
@@ -71,19 +71,19 @@ public class GeometryTessellator extends Tessellator {
 		}
 	}
 
-	public static void drawQuads(final BufferBuilder buffer, final double x0, final double y0, final double z0,
-	                             final double x1, final double y1, final double z1, final int sides, final int argb) {
-		final int a = (argb >>> 24) & 0xFF;
-		final int r = (argb >>> 16) & 0xFF;
-		final int g = (argb >>> 8) & 0xFF;
-		final int b = argb & 0xFF;
+	public static void drawQuads( BufferBuilder buffer,  double x0,  double y0,  double z0,
+	                              double x1,  double y1,  double z1,  int sides,  int argb) {
+		 int a = (argb >>> 24) & 0xFF;
+		 int r = (argb >>> 16) & 0xFF;
+		 int g = (argb >>> 8) & 0xFF;
+		 int b = argb & 0xFF;
 
 		drawQuads(buffer, x0, y0, z0, x1, y1, z1, sides, a, r, g, b);
 	}
 
-	public static void drawQuads(final BufferBuilder buffer, final double x0, final double y0, final double z0,
-	                             final double x1, final double y1, final double z1, final int sides, final int a,
-	                             final int r, final int g, final int b) {
+	public static void drawQuads( BufferBuilder buffer,  double x0,  double y0,  double z0,
+	                              double x1,  double y1,  double z1,  int sides,  int a,
+	                              int r,  int g,  int b) {
 		if ((sides & GeometryMasks.Quad.DOWN) != 0) {
 			buffer.pos(x1, y0, z0).color(r, g, b, a).endVertex();
 			buffer.pos(x1, y0, z1).color(r, g, b, a).endVertex();
@@ -127,19 +127,19 @@ public class GeometryTessellator extends Tessellator {
 		}
 	}
 
-	public static void drawLines(final BufferBuilder buffer, final double x0, final double y0, final double z0,
-	                             final double x1, final double y1, final double z1, final int sides, final int argb) {
-		final int a = (argb >>> 24) & 0xFF;
-		final int r = (argb >>> 16) & 0xFF;
-		final int g = (argb >>> 8) & 0xFF;
-		final int b = argb & 0xFF;
+	public static void drawLines( BufferBuilder buffer,  double x0,  double y0,  double z0,
+	                              double x1,  double y1,  double z1,  int sides,  int argb) {
+		 int a = (argb >>> 24) & 0xFF;
+		 int r = (argb >>> 16) & 0xFF;
+		 int g = (argb >>> 8) & 0xFF;
+		 int b = argb & 0xFF;
 
 		drawLines(buffer, x0, y0, z0, x1, y1, z1, sides, a, r, g, b);
 	}
 
-	public static void drawLines(final BufferBuilder buffer, final double x0, final double y0, final double z0,
-	                             final double x1, final double y1, final double z1, final int sides, final int a,
-	                             final int r, final int g, final int b) {
+	public static void drawLines( BufferBuilder buffer,  double x0,  double y0,  double z0,
+	                              double x1,  double y1,  double z1,  int sides,  int a,
+	                              int r,  int g,  int b) {
 		if ((sides & GeometryMasks.Line.DOWN_WEST) != 0) {
 			buffer.pos(x0, y0, z0).color(r, g, b, a).endVertex();
 			buffer.pos(x0, y0, z1).color(r, g, b, a).endVertex();
@@ -201,7 +201,7 @@ public class GeometryTessellator extends Tessellator {
 		}
 	}
 
-	public void setTranslation(MatrixStack matrixStack, final double x, final double y, final double z) {
+	public void setTranslation(MatrixStack matrixStack,  double x,  double y,  double z) {
 		matrixStack.translate(x, y, z);
 	}
 
@@ -209,7 +209,7 @@ public class GeometryTessellator extends Tessellator {
 		begin(GL11.GL_QUADS);
 	}
 
-	public void begin(final int mode) {
+	public void begin( int mode) {
 		getBuffer().begin(mode, DefaultVertexFormats.POSITION_COLOR);
 	}
 
@@ -217,15 +217,15 @@ public class GeometryTessellator extends Tessellator {
 		begin(GL11.GL_LINES);
 	}
 
-	public void setDelta(final double delta) {
+	public void setDelta( double delta) {
 		this.delta = delta;
 	}
 
-	public void drawCuboid(final BlockPos pos, final int sides, final int argb) {
+	public void drawCuboid( BlockPos pos,  int sides,  int argb) {
 		drawCuboid(pos, pos, sides, argb);
 	}
 
-	public void drawCuboid(final BlockPos begin, final BlockPos end, final int sides, final int argb) {
+	public void drawCuboid( BlockPos begin,  BlockPos end,  int sides,  int argb) {
 		drawCuboid(getBuffer(), begin, end, sides, argb, this.delta);
 	}
 }

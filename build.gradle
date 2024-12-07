@@ -28,7 +28,7 @@ version = "${project.version_minecraft}-${modversion}"
 
 repositories {
 	maven {
-		url = "https://maven.minecraftforge.net/"
+		url = "https://files.minecraftforge.net/maven"
 	}
 }
 

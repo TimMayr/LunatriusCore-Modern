@@ -1,7 +1,7 @@
 pluginManagement {
 	repositories {
 		// Add the MinecraftForge maven
-		maven { url "https://files.minecraftforge.net/maven/" }
+		maven { url "https://files.minecraftforge.net/maven" }
 	}
 }
 

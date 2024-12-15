@@ -4,6 +4,7 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.widget.TextFieldWidget;
 import net.minecraft.client.gui.widget.button.Button;
 
+//TODO: make text field editable
 public class NumericFieldWidget extends Button {
 	private static final int DEFAULT_VALUE = 0;
 	private static final int BUTTON_WIDTH = 12;
@@ -58,36 +59,17 @@ public class NumericFieldWidget extends Button {
 
 		if (this.guiButtonDec.mouseClicked(mouseX, mouseY, button)) {
 			setValue(getValue() - 1);
+			this.onPress();
 			return true;
 		}
 
 		if (this.guiButtonInc.mouseClicked(mouseX, mouseY, button)) {
 			setValue(getValue() + 1);
+			this.onPress();
 			return true;
 		}
 
 		return false;
-	}
-
-	public void mouseClicked(int x, int y, int action) {
-		this.guiTextField.mouseClicked(x, y, action);
-
-		if (this.guiButtonInc.mouseClicked(x, y, action)) {
-			setValue(getValue() + 1);
-		}
-
-		if (this.guiButtonDec.mouseClicked(x, y, action)) {
-			setValue(getValue() - 1);
-		}
-	}
-
-	public void setValue(int value) {
-		if (value > this.maximum) {
-			value = this.maximum;
-		} else if (value < this.minimum) {
-			value = this.minimum;
-		}
-		this.guiTextField.setText(String.valueOf(value));
 	}
 
 	public boolean isFocused() {
@@ -102,6 +84,27 @@ public class NumericFieldWidget extends Button {
 		}
 
 		return Integer.parseInt(text);
+	}
+
+	public void setValue(int value) {
+		if (value > this.maximum) {
+			value = this.maximum;
+		} else if (value < this.minimum) {
+			value = this.minimum;
+		}
+		this.guiTextField.setText(String.valueOf(value));
+	}
+
+	public void mouseClicked(int x, int y, int action) {
+		this.guiTextField.mouseClicked(x, y, action);
+
+		if (this.guiButtonInc.mouseClicked(x, y, action)) {
+			setValue(getValue() + 1);
+		}
+
+		if (this.guiButtonDec.mouseClicked(x, y, action)) {
+			setValue(getValue() - 1);
+		}
 	}
 
 	@Override
@@ -149,7 +152,6 @@ public class NumericFieldWidget extends Button {
 		}
 
 		return false;
-
 	}
 
 	public void tick() {

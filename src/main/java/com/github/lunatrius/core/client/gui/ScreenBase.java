@@ -56,6 +56,25 @@ public class ScreenBase extends Screen {
 		}
 	}
 
+	public boolean charTyped(char character, int code) {
+		for (Widget button : this.buttons) {
+			if (button instanceof NumericFieldWidget) {
+				NumericFieldWidget numericField = (NumericFieldWidget) button;
+				if (numericField.charTyped(character, code)) {
+					return true;
+				}
+			}
+		}
+
+		for (TextFieldWidget textField : this.textFields) {
+			if (textField.charTyped(character,code)) {
+				return true;
+			}
+		}
+
+		return super.charTyped(character, code);
+	}
+
 	@Override
 	public boolean keyPressed(int character, int code, int modifiers) {
 		if (code == GLFW.GLFW_KEY_ESCAPE) {

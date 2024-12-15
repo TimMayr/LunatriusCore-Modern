@@ -14,7 +14,8 @@ import org.lwjgl.opengl.GL11;
 
 public class GuiHelper {
 	private static final ItemRenderer renderItem = Minecraft.getInstance().getItemRenderer();
-	private static final ResourceLocation STAT_ICONS = new ResourceLocation("minecraft", "textures/gui/icons.png");
+	private static final ResourceLocation STAT_ICONS =
+			new ResourceLocation("minecraft", "textures/gui/container/stats_icons.png");
 
 	public static void drawItemStackWithSlot(TextureManager textureManager, ItemStack itemStack, int x, int y) {
 		drawItemStackSlot(textureManager, x, y);

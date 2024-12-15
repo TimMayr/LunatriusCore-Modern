@@ -12,17 +12,17 @@ public class DelayedGuiDisplayTicker {
 	private final Screen screen;
 	private int ticks;
 
-	private DelayedGuiDisplayTicker( Screen screen,  int delay) {
+	private DelayedGuiDisplayTicker(Screen screen, int delay) {
 		this.screen = screen;
 		this.ticks = delay;
 	}
 
-	public static void create( Screen guiScreen,  int delay) {
+	public static void create(Screen guiScreen, int delay) {
 		MinecraftForge.EVENT_BUS.register(new DelayedGuiDisplayTicker(guiScreen, delay));
 	}
 
 	@SubscribeEvent
-	public void onClientTick( TickEvent.ClientTickEvent event) {
+	public void onClientTick(TickEvent.ClientTickEvent event) {
 		this.ticks--;
 
 		if (this.ticks < 0) {

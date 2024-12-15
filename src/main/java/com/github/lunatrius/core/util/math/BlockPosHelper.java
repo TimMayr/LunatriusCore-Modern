@@ -6,14 +6,13 @@ import net.minecraft.util.math.BlockPos;
 import java.util.Iterator;
 
 public class BlockPosHelper {
-	public static Iterable<MBlockPos> getAllInBox( BlockPos from,  BlockPos to) {
+	public static Iterable<MBlockPos> getAllInBox(BlockPos from, BlockPos to) {
 		return getAllInBox(from.getX(), from.getY(), from.getZ(), to.getX(), to.getY(), to.getZ());
 	}
 
-	public static Iterable<MBlockPos> getAllInBox( int fromX,  int fromY,  int fromZ,  int toX,
-	                                               int toY,  int toZ) {
-		 BlockPos posMin = new BlockPos(Math.min(fromX, toX), Math.min(fromY, toY), Math.min(fromZ, toZ));
-		 BlockPos posMax = new BlockPos(Math.max(fromX, toX), Math.max(fromY, toY), Math.max(fromZ, toZ));
+	public static Iterable<MBlockPos> getAllInBox(int fromX, int fromY, int fromZ, int toX, int toY, int toZ) {
+		BlockPos posMin = new BlockPos(Math.min(fromX, toX), Math.min(fromY, toY), Math.min(fromZ, toZ));
+		BlockPos posMax = new BlockPos(Math.max(fromX, toX), Math.max(fromY, toY), Math.max(fromZ, toZ));
 		return new Iterable<MBlockPos>() {
 			@Override
 			public Iterator<MBlockPos> iterator() {
@@ -58,14 +57,13 @@ public class BlockPosHelper {
 		};
 	}
 
-	public static Iterable<MBlockPos> getAllInBoxXZY( BlockPos from,  BlockPos to) {
+	public static Iterable<MBlockPos> getAllInBoxXZY(BlockPos from, BlockPos to) {
 		return getAllInBoxXZY(from.getX(), from.getY(), from.getZ(), to.getX(), to.getY(), to.getZ());
 	}
 
-	public static Iterable<MBlockPos> getAllInBoxXZY( int fromX,  int fromY,  int fromZ,  int toX,
-	                                                  int toY,  int toZ) {
-		 BlockPos posMin = new BlockPos(Math.min(fromX, toX), Math.min(fromY, toY), Math.min(fromZ, toZ));
-		 BlockPos posMax = new BlockPos(Math.max(fromX, toX), Math.max(fromY, toY), Math.max(fromZ, toZ));
+	public static Iterable<MBlockPos> getAllInBoxXZY(int fromX, int fromY, int fromZ, int toX, int toY, int toZ) {
+		BlockPos posMin = new BlockPos(Math.min(fromX, toX), Math.min(fromY, toY), Math.min(fromZ, toZ));
+		BlockPos posMax = new BlockPos(Math.max(fromX, toX), Math.max(fromY, toY), Math.max(fromZ, toZ));
 		return new Iterable<MBlockPos>() {
 			@Override
 			public Iterator<MBlockPos> iterator() {
@@ -110,14 +108,13 @@ public class BlockPosHelper {
 		};
 	}
 
-	public static Iterable<MBlockPos> getAllInBoxYXZ( BlockPos from,  BlockPos to) {
+	public static Iterable<MBlockPos> getAllInBoxYXZ(BlockPos from, BlockPos to) {
 		return getAllInBoxYXZ(from.getX(), from.getY(), from.getZ(), to.getX(), to.getY(), to.getZ());
 	}
 
-	public static Iterable<MBlockPos> getAllInBoxYXZ( int fromX,  int fromY,  int fromZ,  int toX,
-	                                                  int toY,  int toZ) {
-		 BlockPos posMin = new BlockPos(Math.min(fromX, toX), Math.min(fromY, toY), Math.min(fromZ, toZ));
-		 BlockPos posMax = new BlockPos(Math.max(fromX, toX), Math.max(fromY, toY), Math.max(fromZ, toZ));
+	public static Iterable<MBlockPos> getAllInBoxYXZ(int fromX, int fromY, int fromZ, int toX, int toY, int toZ) {
+		BlockPos posMin = new BlockPos(Math.min(fromX, toX), Math.min(fromY, toY), Math.min(fromZ, toZ));
+		BlockPos posMax = new BlockPos(Math.max(fromX, toX), Math.max(fromY, toY), Math.max(fromZ, toZ));
 		return new Iterable<MBlockPos>() {
 			@Override
 			public Iterator<MBlockPos> iterator() {

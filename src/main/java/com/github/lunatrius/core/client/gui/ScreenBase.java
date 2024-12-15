@@ -25,16 +25,20 @@ public class ScreenBase extends Screen {
 
 	@Override
 	public boolean mouseClicked(double mouseX, double mouseY, int mouseEvent) {
-		for ( Widget button : this.buttons) {
+		for (Widget button : this.buttons) {
 			if (button instanceof NumericFieldWidget) {
-				 NumericFieldWidget numericField = (NumericFieldWidget) button;
+				NumericFieldWidget numericField = (NumericFieldWidget) button;
 				if (numericField.mouseClicked(mouseX, mouseY, mouseEvent)) {
+					return true;
+				}
+			} else {
+				if (button.mouseClicked(mouseX, mouseY, mouseEvent)) {
 					return true;
 				}
 			}
 		}
 
-		for ( TextFieldWidget textField : this.textFields) {
+		for (TextFieldWidget textField : this.textFields) {
 			if (textField.mouseClicked(mouseX, mouseY, mouseEvent)) {
 				return true;
 			}
@@ -44,10 +48,10 @@ public class ScreenBase extends Screen {
 	}
 
 	@Override
-	public void render( int mouseX,  int mouseY,  float partialTicks) {
+	public void render(int mouseX, int mouseY, float partialTicks) {
 		super.render(mouseX, mouseY, partialTicks);
 
-		for ( TextFieldWidget textField : this.textFields) {
+		for (TextFieldWidget textField : this.textFields) {
 			textField.render(mouseX, mouseY, partialTicks);
 		}
 	}
@@ -63,9 +67,9 @@ public class ScreenBase extends Screen {
 			return true;
 		}
 
-		for ( Widget button : this.buttons) {
+		for (Widget button : this.buttons) {
 			if (button instanceof NumericFieldWidget) {
-				 NumericFieldWidget numericField = (NumericFieldWidget) button;
+				NumericFieldWidget numericField = (NumericFieldWidget) button;
 				if (numericField.keyPressed(character, code, modifiers)) {
 					numericField.onPress();
 					return true;
@@ -73,7 +77,7 @@ public class ScreenBase extends Screen {
 			}
 		}
 
-		for ( TextFieldWidget textField : this.textFields) {
+		for (TextFieldWidget textField : this.textFields) {
 			if (textField.keyPressed(character, code, modifiers)) {
 				return true;
 			}
@@ -92,14 +96,14 @@ public class ScreenBase extends Screen {
 	public void tick() {
 		super.tick();
 
-		for ( Widget button : this.buttons) {
+		for (Widget button : this.buttons) {
 			if (button instanceof NumericFieldWidget) {
-				 NumericFieldWidget numericField = (NumericFieldWidget) button;
+				NumericFieldWidget numericField = (NumericFieldWidget) button;
 				numericField.tick();
 			}
 		}
 
-		for ( TextFieldWidget textField : this.textFields) {
+		for (TextFieldWidget textField : this.textFields) {
 			textField.tick();
 		}
 	}

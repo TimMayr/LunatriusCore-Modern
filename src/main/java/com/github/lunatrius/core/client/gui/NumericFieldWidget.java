@@ -17,12 +17,12 @@ public class NumericFieldWidget extends Button {
 	private int maximum = Integer.MAX_VALUE;
 	private boolean wasFocused = false;
 
-	public NumericFieldWidget( FontRenderer fontRenderer,  int x,  int y, Button.IPressable onPress) {
+	public NumericFieldWidget(FontRenderer fontRenderer, int x, int y, Button.IPressable onPress) {
 		this(fontRenderer, x, y, 100, 20, onPress);
 	}
 
-	public NumericFieldWidget( FontRenderer fontRenderer,  int x,  int y,  int width,
-	                           int height, Button.IPressable onPress) {
+	public NumericFieldWidget(FontRenderer fontRenderer, int x, int y, int width, int height,
+	                          Button.IPressable onPress) {
 		super(0, 0, width, height, "", onPress);
 		this.guiTextField =
 				new TextFieldWidget(fontRenderer, x + 1, y + 1, width - BUTTON_WIDTH * 2 - 2, height - 2, "");
@@ -34,7 +34,7 @@ public class NumericFieldWidget extends Button {
 		setValue(DEFAULT_VALUE);
 	}
 
-	public NumericFieldWidget( FontRenderer fontRenderer,  int x,  int y,  int width, Button.IPressable onPress) {
+	public NumericFieldWidget(FontRenderer fontRenderer, int x, int y, int width, Button.IPressable onPress) {
 		this(fontRenderer, x, y, width, 20, onPress);
 	}
 
@@ -69,14 +69,16 @@ public class NumericFieldWidget extends Button {
 		return false;
 	}
 
-	public int getValue() {
-		 String text = this.guiTextField.getText();
+	public void mouseClicked(int x, int y, int action) {
+		this.guiTextField.mouseClicked(x, y, action);
 
-		if (text.isEmpty() || text.equals("-")) {
-			return DEFAULT_VALUE;
+		if (this.guiButtonInc.mouseClicked(x, y, action)) {
+			setValue(getValue() + 1);
 		}
 
-		return Integer.parseInt(text);
+		if (this.guiButtonDec.mouseClicked(x, y, action)) {
+			setValue(getValue() - 1);
+		}
 	}
 
 	public void setValue(int value) {
@@ -92,30 +94,28 @@ public class NumericFieldWidget extends Button {
 		return this.guiTextField.isFocused();
 	}
 
-	public void mouseClicked( int x,  int y,  int action) {
-		this.guiTextField.mouseClicked(x, y, action);
+	public int getValue() {
+		String text = this.guiTextField.getText();
 
-		if (this.guiButtonInc.mouseClicked(x, y, action)) {
-			setValue(getValue() + 1);
+		if (text.isEmpty() || text.equals("-")) {
+			return DEFAULT_VALUE;
 		}
 
-		if (this.guiButtonDec.mouseClicked(x, y, action)) {
-			setValue(getValue() - 1);
-		}
+		return Integer.parseInt(text);
 	}
 
 	@Override
-	public boolean charTyped( char character,  int code) {
+	public boolean charTyped(char character, int code) {
 		if (!this.guiTextField.isFocused()) {
 			return false;
 		}
 
-		 int cursorPositionOld = this.guiTextField.getCursorPosition();
+		int cursorPositionOld = this.guiTextField.getCursorPosition();
 
 		this.guiTextField.charTyped(character, code);
 
 		String text = this.guiTextField.getText();
-		 int cursorPositionNew = this.guiTextField.getCursorPosition();
+		int cursorPositionNew = this.guiTextField.getCursorPosition();
 
 		if (text.isEmpty() || text.equals("-")) {
 			return true;
@@ -143,7 +143,7 @@ public class NumericFieldWidget extends Button {
 			this.previous = text;
 
 			return true;
-		} catch ( NumberFormatException nfe) {
+		} catch (NumberFormatException nfe) {
 			this.guiTextField.setText(this.previous);
 			this.guiTextField.setCursorPosition(cursorPositionOld);
 		}
@@ -156,7 +156,7 @@ public class NumericFieldWidget extends Button {
 		this.guiTextField.tick();
 	}
 
-	public void setPosition( int x,  int y) {
+	public void setPosition(int x, int y) {
 		this.guiTextField.x = x + 1;
 		this.guiTextField.y = y + 1;
 		this.guiButtonInc.x = x + width - BUTTON_WIDTH * 2;
@@ -165,7 +165,7 @@ public class NumericFieldWidget extends Button {
 		this.guiButtonDec.y = y;
 	}
 
-	public void setActive( boolean enabled) {
+	public void setActive(boolean enabled) {
 		this.active = enabled;
 		this.guiTextField.setEnabled(enabled);
 		this.guiButtonInc.active = enabled;
@@ -176,7 +176,7 @@ public class NumericFieldWidget extends Button {
 		return this.minimum;
 	}
 
-	public void setMinimum( int minimum) {
+	public void setMinimum(int minimum) {
 		this.minimum = minimum;
 	}
 
@@ -184,7 +184,7 @@ public class NumericFieldWidget extends Button {
 		return this.maximum;
 	}
 
-	public void setMaximum( int maximum) {
+	public void setMaximum(int maximum) {
 		this.maximum = maximum;
 	}
 }

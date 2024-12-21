@@ -4,7 +4,6 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.widget.TextFieldWidget;
 import net.minecraft.client.gui.widget.button.Button;
 
-//TODO: make text field editable
 public class NumericFieldWidget extends Button {
 	private static final int DEFAULT_VALUE = 0;
 	private static final int BUTTON_WIDTH = 12;
@@ -40,6 +39,22 @@ public class NumericFieldWidget extends Button {
 	}
 
 	@Override
+	public void onClick(double x, double y) {
+		this.guiButtonDec.onClick(x, y);
+		this.guiButtonInc.onClick(x, y);
+		this.guiTextField.onClick(x, y);
+		super.onClick(x, y);
+	}
+
+	@Override
+	public boolean keyPressed(int character, int code, int modifiers) {
+		this.guiTextField.keyPressed(character, code, modifiers);
+		this.guiButtonDec.keyPressed(character, code, modifiers);
+		this.guiButtonInc.keyPressed(character, code, modifiers);
+		return super.keyPressed(character, code, modifiers);
+	}
+
+	@Override
 	public void renderButton(int x, int y, float partialTicks) {
 		if (this.visible) {
 			this.guiTextField.render(x, y, partialTicks);
@@ -69,6 +84,12 @@ public class NumericFieldWidget extends Button {
 			return true;
 		}
 
+		if (this.guiTextField.mouseClicked(mouseX, mouseY, button)) {
+			setValue(Integer.parseInt(guiTextField.getText()));
+			this.onPress();
+			return true;
+		}
+
 		return false;
 	}
 
@@ -93,18 +114,6 @@ public class NumericFieldWidget extends Button {
 			value = this.minimum;
 		}
 		this.guiTextField.setText(String.valueOf(value));
-	}
-
-	public void mouseClicked(int x, int y, int action) {
-		this.guiTextField.mouseClicked(x, y, action);
-
-		if (this.guiButtonInc.mouseClicked(x, y, action)) {
-			setValue(getValue() + 1);
-		}
-
-		if (this.guiButtonDec.mouseClicked(x, y, action)) {
-			setValue(getValue() - 1);
-		}
 	}
 
 	@Override
@@ -144,7 +153,7 @@ public class NumericFieldWidget extends Button {
 			}
 
 			this.previous = text;
-
+			this.onPress();
 			return true;
 		} catch (NumberFormatException nfe) {
 			this.guiTextField.setText(this.previous);

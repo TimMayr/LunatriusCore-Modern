@@ -48,7 +48,7 @@ Git is used to clone LunatriusCore and update your local copy.
 #### Setup LunatriusCore
 
 This section assumes that you're using the command-line version of Git.
-
+https://github.com/TimMayr/LunatriusCore-Modern
 1. Open up your command line.
 2. Navigate to a place where you want to download LunatriusCore's source (eg `C:\Development\Github\Minecraft\`) by
    executing `cd [folder location]`. This location is known as `mcdev` from now on.
@@ -69,7 +69,7 @@ This section assumes that you're using the command-line version of Git.
 
 1. Import the gradle project in an ide like intellij
 2. Run the build task
-3. Go to `mcdev\LunatriusCore\build\libs`.
+3. Go to `mcdev\LunatriusCore-Modern\build\libs`.
    * You should see a `.jar` file named `LunatriusCore-#.#.#-#.#.#.#.jar`.
 4. Copy the jar into your Minecraft mods folder, and you are done!
 

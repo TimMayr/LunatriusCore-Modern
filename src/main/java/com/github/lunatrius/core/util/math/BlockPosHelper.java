@@ -1,7 +1,8 @@
 package com.github.lunatrius.core.util.math;
 
 import com.google.common.collect.AbstractIterator;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.core.BlockPos;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Iterator;
 
@@ -13,10 +14,11 @@ public class BlockPosHelper {
 	public static Iterable<MBlockPos> getAllInBox(int fromX, int fromY, int fromZ, int toX, int toY, int toZ) {
 		BlockPos posMin = new BlockPos(Math.min(fromX, toX), Math.min(fromY, toY), Math.min(fromZ, toZ));
 		BlockPos posMax = new BlockPos(Math.max(fromX, toX), Math.max(fromY, toY), Math.max(fromZ, toZ));
-		return new Iterable<MBlockPos>() {
+		return new Iterable<>() {
 			@Override
+			@NotNull
 			public Iterator<MBlockPos> iterator() {
-				return new AbstractIterator<MBlockPos>() {
+				return new AbstractIterator<>() {
 					private MBlockPos pos = null;
 					private int x;
 					private int y;
@@ -64,10 +66,11 @@ public class BlockPosHelper {
 	public static Iterable<MBlockPos> getAllInBoxXZY(int fromX, int fromY, int fromZ, int toX, int toY, int toZ) {
 		BlockPos posMin = new BlockPos(Math.min(fromX, toX), Math.min(fromY, toY), Math.min(fromZ, toZ));
 		BlockPos posMax = new BlockPos(Math.max(fromX, toX), Math.max(fromY, toY), Math.max(fromZ, toZ));
-		return new Iterable<MBlockPos>() {
+		return new Iterable<>() {
 			@Override
+			@NotNull
 			public Iterator<MBlockPos> iterator() {
-				return new AbstractIterator<MBlockPos>() {
+				return new AbstractIterator<>() {
 					private MBlockPos pos = null;
 					private int x;
 					private int y;
@@ -115,10 +118,11 @@ public class BlockPosHelper {
 	public static Iterable<MBlockPos> getAllInBoxYXZ(int fromX, int fromY, int fromZ, int toX, int toY, int toZ) {
 		BlockPos posMin = new BlockPos(Math.min(fromX, toX), Math.min(fromY, toY), Math.min(fromZ, toZ));
 		BlockPos posMax = new BlockPos(Math.max(fromX, toX), Math.max(fromY, toY), Math.max(fromZ, toZ));
-		return new Iterable<MBlockPos>() {
+		return new Iterable<>() {
 			@Override
+			@NotNull
 			public Iterator<MBlockPos> iterator() {
-				return new AbstractIterator<MBlockPos>() {
+				return new AbstractIterator<>() {
 					private MBlockPos pos = null;
 					private int x;
 					private int y;

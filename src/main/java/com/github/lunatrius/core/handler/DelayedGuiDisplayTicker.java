@@ -1,13 +1,11 @@
 package com.github.lunatrius.core.handler;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.minecraft.client.gui.screens.Screen;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.neoforge.client.event.ClientTickEvent;
+import net.neoforged.neoforge.common.NeoForge;
 
-@Mod.EventBusSubscriber
 public class DelayedGuiDisplayTicker {
 	private final Screen screen;
 	private int ticks;
@@ -18,16 +16,16 @@ public class DelayedGuiDisplayTicker {
 	}
 
 	public static void create(Screen guiScreen, int delay) {
-		MinecraftForge.EVENT_BUS.register(new DelayedGuiDisplayTicker(guiScreen, delay));
+		NeoForge.EVENT_BUS.register(new DelayedGuiDisplayTicker(guiScreen, delay));
 	}
 
 	@SubscribeEvent
-	public void onClientTick(TickEvent.ClientTickEvent event) {
+	public void onClientTick(ClientTickEvent event) {
 		this.ticks--;
 
 		if (this.ticks < 0) {
-			Minecraft.getInstance().displayGuiScreen(this.screen);
-			MinecraftForge.EVENT_BUS.unregister(this);
+			Minecraft.getInstance().setScreen(this.screen);
+			NeoForge.EVENT_BUS.unregister(this);
 		}
 	}
 }

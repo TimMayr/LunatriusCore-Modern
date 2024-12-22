@@ -19,3 +19,10 @@
 /*.iml
 /*.ipr
 /*.iws
+
+# other
+eclipse
+runs
+run-data
+
+repo

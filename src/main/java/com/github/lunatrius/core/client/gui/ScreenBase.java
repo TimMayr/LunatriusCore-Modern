@@ -1,78 +1,76 @@
 package com.github.lunatrius.core.client.gui;
 
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.gui.widget.TextFieldWidget;
-import net.minecraft.client.gui.widget.Widget;
-import net.minecraft.util.text.StringTextComponent;
+
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.EditBox;
+import net.minecraft.client.gui.components.events.GuiEventListener;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.network.chat.CommonComponents;
 import org.lwjgl.glfw.GLFW;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.annotation.ParametersAreNonnullByDefault;
+
 
 public class ScreenBase extends Screen {
 	protected final Screen parentScreen;
 
-	protected final List<TextFieldWidget> textFields = new ArrayList<>();
 
 	public ScreenBase() {
 		this(null);
 	}
 
 	public ScreenBase(Screen parentScreen) {
-		super(new StringTextComponent(""));
+		super(CommonComponents.EMPTY);
 		this.parentScreen = parentScreen;
 	}
 
 	@Override
 	public boolean mouseClicked(double mouseX, double mouseY, int mouseEvent) {
-		for (Widget button : this.buttons) {
-			if (button instanceof NumericFieldWidget) {
-				NumericFieldWidget numericField = (NumericFieldWidget) button;
+		for (GuiEventListener child : this.children()) {
+			if (child instanceof NumericFieldWidget numericField) {
 				if (numericField.mouseClicked(mouseX, mouseY, mouseEvent)) {
 					return true;
 				}
-			} else {
-				if (button.mouseClicked(mouseX, mouseY, mouseEvent)) {
+			} else if (child instanceof EditBox textArea) {
+				if (textArea.mouseClicked(mouseX, mouseY, mouseEvent)) {
 					return true;
 				}
-			}
-		}
-
-		for (TextFieldWidget textField : this.textFields) {
-			if (textField.mouseClicked(mouseX, mouseY, mouseEvent)) {
-				return true;
+			} else {
+				if (child.mouseClicked(mouseX, mouseY, mouseEvent)) {
+					return true;
+				}
 			}
 		}
 
 		return super.mouseClicked(mouseX, mouseY, mouseEvent);
 	}
 
-	@Override
-	public void render(int mouseX, int mouseY, float partialTicks) {
-		super.render(mouseX, mouseY, partialTicks);
-
-		for (TextFieldWidget textField : this.textFields) {
-			textField.render(mouseX, mouseY, partialTicks);
-		}
-	}
-
 	public boolean charTyped(char character, int code) {
-		for (Widget button : this.buttons) {
-			if (button instanceof NumericFieldWidget) {
-				NumericFieldWidget numericField = (NumericFieldWidget) button;
+		for (GuiEventListener child : this.children()) {
+			if (child instanceof NumericFieldWidget numericField) {
 				if (numericField.charTyped(character, code)) {
+					return true;
+				}
+			} else if (child instanceof EditBox textArea) {
+				if (textArea.charTyped(character, code)) {
 					return true;
 				}
 			}
 		}
 
-		for (TextFieldWidget textField : this.textFields) {
-			if (textField.charTyped(character,code)) {
-				return true;
+		return super.charTyped(character, code);
+	}
+
+	@ParametersAreNonnullByDefault
+	@Override
+	public void render(GuiGraphics guiGraphics, int x, int y, float partialTicks) {
+		super.render(guiGraphics, x, y, partialTicks);
+
+		for (GuiEventListener child : this.children()) {
+			if (child instanceof EditBox textArea) {
+				textArea.render(guiGraphics, x, y, partialTicks);
 			}
 		}
-
-		return super.charTyped(character, code);
 	}
 
 	@Override
@@ -82,23 +80,18 @@ public class ScreenBase extends Screen {
 				return false;
 			}
 
-			this.minecraft.displayGuiScreen(this.parentScreen);
+			this.minecraft.setScreen(this.parentScreen);
 			return true;
 		}
 
-		for (Widget button : this.buttons) {
-			if (button instanceof NumericFieldWidget) {
-				NumericFieldWidget numericField = (NumericFieldWidget) button;
+		for (GuiEventListener child : this.children()) {
+			if (child instanceof NumericFieldWidget numericField) {
 				if (numericField.keyPressed(character, code, modifiers)) {
 					numericField.onPress();
 					return true;
 				}
-			}
-		}
-
-		for (TextFieldWidget textField : this.textFields) {
-			if (textField.keyPressed(character, code, modifiers)) {
-				return true;
+			} else if (child instanceof EditBox textArea) {
+				textArea.keyPressed(character, code, modifiers);
 			}
 		}
 
@@ -107,23 +100,6 @@ public class ScreenBase extends Screen {
 
 	@Override
 	public void init() {
-		this.buttons.clear();
-		this.textFields.clear();
-	}
-
-	@Override
-	public void tick() {
-		super.tick();
-
-		for (Widget button : this.buttons) {
-			if (button instanceof NumericFieldWidget) {
-				NumericFieldWidget numericField = (NumericFieldWidget) button;
-				numericField.tick();
-			}
-		}
-
-		for (TextFieldWidget textField : this.textFields) {
-			textField.tick();
-		}
+		this.children().clear();
 	}
 }

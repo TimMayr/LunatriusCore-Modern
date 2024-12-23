@@ -15,8 +15,8 @@ public class DelayedGuiDisplayTicker {
 		this.ticks = delay;
 	}
 
-	public static void create(Screen guiScreen, int delay) {
-		NeoForge.EVENT_BUS.register(new DelayedGuiDisplayTicker(guiScreen, delay));
+	public static void create(Screen screen, int delay) {
+		NeoForge.EVENT_BUS.register(new DelayedGuiDisplayTicker(screen, delay));
 	}
 
 	@SubscribeEvent

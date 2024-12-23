@@ -8,10 +8,10 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
 public class EntityHelper {
-	public static final int WILDMARK = -1;
+	public static final int WILDCARD = -1;
 
 	public static int getItemCountInInventory(Inventory inventory, Item item) {
-		return getItemCountInInventory(inventory, item, WILDMARK);
+		return getItemCountInInventory(inventory, item, WILDCARD);
 	}
 
 	public static int getItemCountInInventory(Inventory inventory, Item item, int itemDamage) {
@@ -21,7 +21,7 @@ public class EntityHelper {
 		for (int slot = 0; slot < inventorySize; slot++) {
 			ItemStack itemStack = inventory.getItem(slot);
 
-			if (itemStack.getItem() == item && (itemDamage == WILDMARK || itemDamage == itemStack.getDamageValue())) {
+			if (itemStack.getItem() == item && (itemDamage == WILDCARD || itemDamage == itemStack.getDamageValue())) {
 				count += itemStack.getCount();
 			}
 		}

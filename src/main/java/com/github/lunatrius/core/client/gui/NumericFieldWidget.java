@@ -14,7 +14,7 @@ public class NumericFieldWidget extends Button {
 	private static final int DEFAULT_VALUE = 0;
 	private static final int BUTTON_WIDTH = 12;
 
-	private final EditBox guiTextField;
+	private final EditBox guiEditBox;
 	private final PlainTextButton guiButtonDec;
 	private final PlainTextButton guiButtonInc;
 
@@ -29,7 +29,7 @@ public class NumericFieldWidget extends Button {
 
 	public NumericFieldWidget(int x, int y, int width, int height, Button.OnPress onPress) {
 		super(0, 0, width, height, CommonComponents.EMPTY, onPress, DEFAULT_NARRATION);
-		this.guiTextField =
+		this.guiEditBox =
 				new EditBox(Minecraft.getInstance().font, x + 1, y + 1, width - BUTTON_WIDTH * 2 - 2, height - 2,
 				            CommonComponents.EMPTY);
 
@@ -50,11 +50,11 @@ public class NumericFieldWidget extends Button {
 
 	@ParametersAreNonnullByDefault
 	@Override
-	protected void renderWidget(GuiGraphics graphics, int x, int y, float partialTicks) {
+	protected void renderWidget(GuiGraphics guiGraphics, int x, int y, float partialTicks) {
 		if (this.visible) {
-			this.guiTextField.renderWidget(graphics, x, y, partialTicks);
-			this.guiButtonInc.renderWidget(graphics, x, y, partialTicks);
-			this.guiButtonDec.renderWidget(graphics, x, y, partialTicks);
+			this.guiEditBox.renderWidget(guiGraphics, x, y, partialTicks);
+			this.guiButtonInc.renderWidget(guiGraphics, x, y, partialTicks);
+			this.guiButtonDec.renderWidget(guiGraphics, x, y, partialTicks);
 		}
 	}
 
@@ -62,13 +62,13 @@ public class NumericFieldWidget extends Button {
 	public void onClick(double x, double y) {
 		this.guiButtonDec.onClick(x, y);
 		this.guiButtonInc.onClick(x, y);
-		this.guiTextField.onClick(x, y);
+		this.guiEditBox.onClick(x, y);
 		super.onClick(x, y);
 	}
 
 	@Override
 	public boolean keyPressed(int character, int code, int modifiers) {
-		this.guiTextField.keyPressed(character, code, modifiers);
+		this.guiEditBox.keyPressed(character, code, modifiers);
 		this.guiButtonDec.keyPressed(character, code, modifiers);
 		this.guiButtonInc.keyPressed(character, code, modifiers);
 		return super.keyPressed(character, code, modifiers);
@@ -76,12 +76,12 @@ public class NumericFieldWidget extends Button {
 
 	@Override
 	public boolean mouseClicked(double mouseX, double mouseY, int button) {
-		if (this.wasFocused && !this.guiTextField.isFocused()) {
+		if (this.wasFocused && !this.guiEditBox.isFocused()) {
 			this.wasFocused = false;
 			return true;
 		}
 
-		this.wasFocused = this.guiTextField.isFocused();
+		this.wasFocused = this.guiEditBox.isFocused();
 
 		if (this.guiButtonDec.mouseClicked(mouseX, mouseY, button)) {
 			setValue(getValue() - 1);
@@ -95,8 +95,8 @@ public class NumericFieldWidget extends Button {
 			return true;
 		}
 
-		if (this.guiTextField.mouseClicked(mouseX, mouseY, button)) {
-			setValue(Integer.parseInt(guiTextField.getValue()));
+		if (this.guiEditBox.mouseClicked(mouseX, mouseY, button)) {
+			setValue(Integer.parseInt(guiEditBox.getValue()));
 			this.onPress();
 			return true;
 		}
@@ -105,11 +105,11 @@ public class NumericFieldWidget extends Button {
 	}
 
 	public boolean isFocused() {
-		return this.guiTextField.isFocused();
+		return this.guiEditBox.isFocused();
 	}
 
 	public int getValue() {
-		String text = this.guiTextField.getValue();
+		String text = this.guiEditBox.getValue();
 
 		if (text.isEmpty() || text.equals("-")) {
 			return DEFAULT_VALUE;
@@ -124,21 +124,21 @@ public class NumericFieldWidget extends Button {
 		} else if (value < this.minimum) {
 			value = this.minimum;
 		}
-		this.guiTextField.setValue(String.valueOf(value));
+		this.guiEditBox.setValue(String.valueOf(value));
 	}
 
 	@Override
 	public boolean charTyped(char character, int code) {
-		if (!this.guiTextField.isFocused()) {
+		if (!this.guiEditBox.isFocused()) {
 			return false;
 		}
 
-		int cursorPositionOld = this.guiTextField.getCursorPosition();
+		int cursorPositionOld = this.guiEditBox.getCursorPosition();
 
-		this.guiTextField.charTyped(character, code);
+		this.guiEditBox.charTyped(character, code);
 
-		String text = this.guiTextField.getValue();
-		int cursorPositionNew = this.guiTextField.getCursorPosition();
+		String text = this.guiEditBox.getValue();
+		int cursorPositionNew = this.guiEditBox.getCursorPosition();
 
 		if (text.isEmpty() || text.equals("-")) {
 			return true;
@@ -159,30 +159,30 @@ public class NumericFieldWidget extends Button {
 			text = String.valueOf(value);
 
 			if (!text.equals(this.previous) || outOfRange) {
-				this.guiTextField.setValue(String.valueOf(value));
-				this.guiTextField.setCursorPosition(cursorPositionNew);
+				this.guiEditBox.setValue(String.valueOf(value));
+				this.guiEditBox.setCursorPosition(cursorPositionNew);
 			}
 
 			this.previous = text;
 			this.onPress();
 			return true;
 		} catch (NumberFormatException nfe) {
-			this.guiTextField.setValue(this.previous);
-			this.guiTextField.setCursorPosition(cursorPositionOld);
+			this.guiEditBox.setValue(this.previous);
+			this.guiEditBox.setCursorPosition(cursorPositionOld);
 		}
 
 		return false;
 	}
 
 	public void setPosition(int x, int y) {
-		this.guiTextField.setPosition(x + 1, y + 1);
+		this.guiEditBox.setPosition(x + 1, y + 1);
 		this.guiButtonInc.setPosition(x + width - BUTTON_WIDTH * 2, y);
 		this.guiButtonDec.setPosition(x + width - BUTTON_WIDTH, y);
 	}
 
 	public void setActive(boolean active) {
 		this.active = active;
-		this.guiTextField.active = active;
+		this.guiEditBox.active = active;
 		this.guiButtonInc.active = active;
 		this.guiButtonDec.active = active;
 	}

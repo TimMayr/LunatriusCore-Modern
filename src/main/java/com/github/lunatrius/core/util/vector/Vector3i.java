@@ -1,5 +1,7 @@
 package com.github.lunatrius.core.util.vector;
 
+import net.minecraft.core.Position;
+
 public class Vector3i extends Vector2i {
 	public int z;
 
@@ -7,17 +9,21 @@ public class Vector3i extends Vector2i {
 		this(0, 0, 0);
 	}
 
-	public Vector3i(Vector3i vec) {
-		this(vec.x, vec.y, vec.z);
-	}
-
 	public Vector3i(int x, int y, int z) {
 		super(x, y);
 		this.z = z;
 	}
 
+	public Vector3i(Vector3i vec) {
+		this(vec.x, vec.y, vec.z);
+	}
+
 	public Vector3i(int num) {
 		this(num, num, num);
+	}
+
+	public Vector3i(Position pos) {
+		this((int) Math.floor(pos.x()), (int) Math.floor(pos.y()), (int) Math.floor(pos.z()));
 	}
 
 	public int getZ() {

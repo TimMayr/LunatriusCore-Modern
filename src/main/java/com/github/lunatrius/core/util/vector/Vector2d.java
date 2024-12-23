@@ -1,5 +1,7 @@
 package com.github.lunatrius.core.util.vector;
 
+import net.minecraft.world.phys.Vec2;
+
 public class Vector2d {
 	public static final double DOUBLE_EPSILON = 10e-6f;
 	public double x;
@@ -9,13 +11,17 @@ public class Vector2d {
 		this(0, 0);
 	}
 
+	public Vector2d(double x, double y) {
+		this.x = x;
+		this.y = y;
+	}
+
 	public Vector2d(Vector2d vec) {
 		this(vec.x, vec.y);
 	}
 
-	public Vector2d(double x, double y) {
-		this.x = x;
-		this.y = y;
+	public Vector2d(Vec2 vec2) {
+		this(vec2.x, vec2.y);
 	}
 
 	public Vector2d(double num) {

@@ -2,8 +2,8 @@ package com.github.lunatrius.core.util.math;
 
 import com.google.common.collect.AbstractIterator;
 import net.minecraft.core.BlockPos;
-import org.jetbrains.annotations.NotNull;
 
+import javax.annotation.Nonnull;
 import java.util.Iterator;
 
 public class BlockPosHelper {
@@ -16,7 +16,7 @@ public class BlockPosHelper {
 		BlockPos posMax = new BlockPos(Math.max(fromX, toX), Math.max(fromY, toY), Math.max(fromZ, toZ));
 		return new Iterable<>() {
 			@Override
-			@NotNull
+			@Nonnull
 			public Iterator<MBlockPos> iterator() {
 				return new AbstractIterator<>() {
 					private MBlockPos pos = null;
@@ -68,7 +68,7 @@ public class BlockPosHelper {
 		BlockPos posMax = new BlockPos(Math.max(fromX, toX), Math.max(fromY, toY), Math.max(fromZ, toZ));
 		return new Iterable<>() {
 			@Override
-			@NotNull
+			@Nonnull
 			public Iterator<MBlockPos> iterator() {
 				return new AbstractIterator<>() {
 					private MBlockPos pos = null;
@@ -120,7 +120,7 @@ public class BlockPosHelper {
 		BlockPos posMax = new BlockPos(Math.max(fromX, toX), Math.max(fromY, toY), Math.max(fromZ, toZ));
 		return new Iterable<>() {
 			@Override
-			@NotNull
+			@Nonnull
 			public Iterator<MBlockPos> iterator() {
 				return new AbstractIterator<>() {
 					private MBlockPos pos = null;

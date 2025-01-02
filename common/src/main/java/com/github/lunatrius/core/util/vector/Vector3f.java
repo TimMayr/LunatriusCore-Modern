@@ -1,5 +1,7 @@
 package com.github.lunatrius.core.util.vector;
 
+import net.minecraft.core.Position;
+
 public class Vector3f extends Vector2f {
 	public float z;
 
@@ -18,6 +20,10 @@ public class Vector3f extends Vector2f {
 
 	public Vector3f(float num) {
 		this(num, num, num);
+	}
+
+	public Vector3f(Position position) {
+		this((float) position.x(), (float) position.y(), (float) position.z());
 	}
 
 	public float getZ() {

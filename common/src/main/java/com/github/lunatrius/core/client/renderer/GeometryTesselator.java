@@ -2,11 +2,11 @@ package com.github.lunatrius.core.client.renderer;
 
 import com.mojang.blaze3d.vertex.*;
 import net.minecraft.core.BlockPos;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.Nullable;
 
 public class GeometryTesselator extends Tesselator {
-	private static GeometryTesselator instance = null;
+	@Nullable
+	private static GeometryTesselator instance;
 
 	private static double deltaS = 0;
 
@@ -18,7 +18,7 @@ public class GeometryTesselator extends Tesselator {
 		super(size);
 	}
 
-	public static @Nonnull GeometryTesselator getInstance() {
+	public static GeometryTesselator getInstance() {
 		if (instance == null) {
 			instance = new GeometryTesselator();
 		}

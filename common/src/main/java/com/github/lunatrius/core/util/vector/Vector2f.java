@@ -1,5 +1,7 @@
 package com.github.lunatrius.core.util.vector;
 
+import net.minecraft.world.phys.Vec2;
+
 public class Vector2f {
 	public static final float FLOAT_EPSILON = 10e-6f;
 	public float x;
@@ -12,6 +14,10 @@ public class Vector2f {
 	public Vector2f(float x, float y) {
 		this.x = x;
 		this.y = y;
+	}
+
+	public Vector2f(Vec2 vec2) {
+		this(vec2.x, vec2.y);
 	}
 
 	public Vector2f(Vector2f vec) {

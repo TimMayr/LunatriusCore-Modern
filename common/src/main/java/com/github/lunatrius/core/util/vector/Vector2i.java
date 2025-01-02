@@ -1,5 +1,7 @@
 package com.github.lunatrius.core.util.vector;
 
+import net.minecraft.world.phys.Vec2;
+
 public class Vector2i {
 	public int x;
 	public int y;
@@ -11,6 +13,10 @@ public class Vector2i {
 	public Vector2i(int x, int y) {
 		this.x = x;
 		this.y = y;
+	}
+
+	public Vector2i(Vec2 vec2) {
+		this((int) Math.floor(vec2.x), (int) Math.floor(vec2.y));
 	}
 
 	public Vector2i(Vector2i vec) {

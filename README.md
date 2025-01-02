@@ -49,6 +49,7 @@ Git is used to clone LunatriusCore and update your local copy.
 
 This section assumes that you're using the command-line version of Git.
 https://github.com/TimMayr/LunatriusCore-Modern
+
 1. Open up your command line.
 2. Navigate to a place where you want to download LunatriusCore's source (eg `C:\Development\Github\Minecraft\`) by
    executing `cd [folder location]`. This location is known as `mcdev` from now on.

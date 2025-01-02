@@ -1,0 +1,31 @@
+{
+	"schemaVersion": 1,
+	"id": "${archives_name}",
+	"version": "${version}",
+	"name": "${mod_name}",
+	"description": "A collection of utilities for Lunatrius' mods.",
+	"authors": [
+		"Lunatrius",
+		"EmilyTheGrate"
+	],
+	"license": "MIT License",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"com.github.lunatrius.core.fabric.LunatriusCoreFabric"
+		],
+		"client": [
+			"com.github.lunatrius.core.fabric.client.LunatriusCoreFabricClient"
+		]
+	},
+	"mixins": [
+		"lunatriuscore.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=${fabric_loader_version}",
+		"minecraft": "~${minecraft_version}",
+		"java": ">=21",
+		"architectury": ">=${architectury_api_version}",
+		"fabric-api": "${fabric_api_version}"
+	}
+}

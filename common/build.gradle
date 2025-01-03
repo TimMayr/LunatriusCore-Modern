@@ -17,7 +17,7 @@ var generateReference = tasks.register("generateReference", ProcessResources) {
 	var replaceProperties = [mod_id: archives_name]
 	inputs.properties replaceProperties
 	expand replaceProperties
-	from "src/main/java/com/github/lunatrius/core/reference"
+	from "src/main/java/${maven_group.replaceAll('\\.', '/')}/reference"
 	into "build/generated/sources/reference"
 }
 
@@ -35,7 +35,7 @@ sourceSets {
 	main {
 		java {
 			srcDir 'build/generated/sources/reference'
-			exclude 'com/github/lunatrius/core/reference/Reference.java'
+			exclude "${maven_group.replaceAll('\\.', '/')}/reference/Reference.java"
 		}
 	}
 }

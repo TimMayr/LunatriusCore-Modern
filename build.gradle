@@ -9,10 +9,6 @@ architectury {
 }
 
 allprojects {
-	apply plugin: "java"
-	apply plugin: "architectury-plugin"
-	apply plugin: "maven-publish"
-
 	group = rootProject.maven_group
 	version = "${rootProject.minecraft_version}-${rootProject.mod_version}"
 

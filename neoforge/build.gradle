@@ -7,8 +7,6 @@ architectury {
 	neoForge()
 }
 
-version = "${rootProject.minecraft_version}-${rootProject.mod_version}-NeoForge"
-
 configurations {
 	common {
 		canBeResolved = true

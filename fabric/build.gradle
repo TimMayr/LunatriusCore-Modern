@@ -7,8 +7,6 @@ architectury {
 	fabric()
 }
 
-version = "${rootProject.minecraft_version}-${rootProject.mod_version}-fabric"
-
 configurations {
 	common {
 		canBeResolved = true

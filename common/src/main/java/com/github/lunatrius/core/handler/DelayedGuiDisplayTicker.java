@@ -22,7 +22,7 @@ public class DelayedGuiDisplayTicker {
 	}
 
 	public static void create(Screen guiScreen, int delay) {
-		final DelayedGuiDisplayTicker delayedGuiDisplayTicker = new DelayedGuiDisplayTicker(guiScreen, delay);
+		DelayedGuiDisplayTicker delayedGuiDisplayTicker = new DelayedGuiDisplayTicker(guiScreen, delay);
 		ClientTickEvent.CLIENT_PRE.register(delayedGuiDisplayTicker.client);
 	}
 }

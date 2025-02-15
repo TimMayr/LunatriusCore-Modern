@@ -6,6 +6,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.NotNull;
 
 @MethodsReturnNonnullByDefault
 public class MBlockPos extends BlockPos {
@@ -24,7 +25,7 @@ public class MBlockPos extends BlockPos {
 		this.z = z;
 	}
 
-	public MBlockPos(Entity source) {
+	public MBlockPos(@NotNull Entity source) {
 		this(source.getX(), source.getY(), source.getZ());
 	}
 
@@ -32,15 +33,15 @@ public class MBlockPos extends BlockPos {
 		this((int) Math.floor(x), (int) Math.floor(y), (int) Math.floor(z));
 	}
 
-	public MBlockPos(Vec3 source) {
+	public MBlockPos(@NotNull Vec3 source) {
 		this(source.x, source.y, source.z);
 	}
 
-	public MBlockPos(Vec3i source) {
+	public MBlockPos(@NotNull Vec3i source) {
 		this(source.getX(), source.getY(), source.getZ());
 	}
 
-	public MBlockPos set(Entity source) {
+	public MBlockPos set(@NotNull Entity source) {
 		return set(source.getX(), source.getY(), source.getZ());
 	}
 
@@ -55,11 +56,11 @@ public class MBlockPos extends BlockPos {
 		return this;
 	}
 
-	public MBlockPos set(Vec3 source) {
+	public MBlockPos set(@NotNull Vec3 source) {
 		return set(source.x, source.y, source.z);
 	}
 
-	public MBlockPos set(Vec3i source) {
+	public MBlockPos set(@NotNull Vec3i source) {
 		return set(source.getX(), source.getY(), source.getZ());
 	}
 
@@ -81,11 +82,11 @@ public class MBlockPos extends BlockPos {
 	}
 
 	@Override
-	public MBlockPos offset(Vec3i vec) {
+	public MBlockPos offset(@NotNull Vec3i vec) {
 		return offset(vec.getX(), vec.getY(), vec.getZ());
 	}
 
-	public MBlockPos subtract(Vec3i vec) {
+	public MBlockPos subtract(@NotNull Vec3i vec) {
 		return subtract(vec.getX(), vec.getY(), vec.getZ());
 	}
 
@@ -159,15 +160,15 @@ public class MBlockPos extends BlockPos {
 	}
 
 	@Override
-	public MBlockPos relative(Direction facing, int n) {
+	public MBlockPos relative(@NotNull Direction facing, int n) {
 		return new MBlockPos(this.x + facing.getStepX() * n, this.y + facing.getStepY() * n,
-		                     this.z + facing.getStepZ() * n);
+				this.z + facing.getStepZ() * n);
 	}
 
 	@Override
-	public MBlockPos cross(Vec3i vec) {
+	public MBlockPos cross(@NotNull Vec3i vec) {
 		return new MBlockPos(this.y * vec.getZ() - this.z * vec.getY(), this.z * vec.getX() - this.x * vec.getZ(),
-		                     this.x * vec.getY() - this.y * vec.getX());
+				this.x * vec.getY() - this.y * vec.getX());
 	}
 
 	@Override
@@ -188,5 +189,10 @@ public class MBlockPos extends BlockPos {
 	@Override
 	public int getZ() {
 		return this.z;
+	}
+
+	@Override
+	public String toString() {
+		return String.format("%d %d %d", x, y, z);
 	}
 }

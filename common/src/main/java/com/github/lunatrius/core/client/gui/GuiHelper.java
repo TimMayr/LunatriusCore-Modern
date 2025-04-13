@@ -1,6 +1,7 @@
 package com.github.lunatrius.core.client.gui;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.textures.GpuTexture;
 import com.mojang.blaze3d.vertex.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -24,7 +25,9 @@ public class GuiHelper {
 	}
 
 	public static void drawItemStackSlot(int x, int y) {
-		RenderSystem.setShaderTexture(0, STAT_ICONS);
+		GpuTexture textureManager = Minecraft.getInstance().getTextureManager().getTexture(STAT_ICONS).getTexture();
+
+		RenderSystem.setShaderTexture(0, textureManager);
 		RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
 
 		Tesselator tesselator = Tesselator.getInstance();
@@ -33,7 +36,7 @@ public class GuiHelper {
 		float vScale = (float) (1.0 / 128.0);
 
 		drawTexturedRectangle(buffer, x + 1, y + 1, x + 1 + 18, y + 1 + 18, 0, uScale * 0, vScale * 0, uScale * 18,
-		                      vScale * 18);
+				vScale * 18);
 	}
 
 	public static void drawTexturedRectangle(BufferBuilder buffer, float x0, float y0, float x1, float y1, float z,
@@ -51,15 +54,11 @@ public class GuiHelper {
 		MultiBufferSource bufferSource = MultiBufferSource.immediate(new ByteBufferBuilder(1536));
 
 		// Prepare rendering
-		RenderSystem.enableDepthTest();
 		poseStack.translate(x, y, 100); // Render in front of GUI elements if needed
 
 		// Render the item
 		itemRenderer.renderStatic(itemStack, ItemDisplayContext.GUI, 15, 0, poseStack, bufferSource, mc.level,
-		                          (int) (Math.random() * 1000));
-
-		// Clean up
-		RenderSystem.disableDepthTest();
+				(int) (Math.random() * 1000));
 	}
 
 	public static void drawTexturedRectangle(BufferBuilder buffer, float x0, float y0, float x1, float y1, float z,
@@ -119,8 +118,8 @@ public class GuiHelper {
 		ColorComponents components = getColorComponents(startColor, endColor);
 
 		drawVerticalGradientRectangle(buffer, x0, y0, x1, y1, z, components.sr(), components.sg(), components.sb(),
-		                              components.sa(), components.er(), components.eg(), components.eb(),
-		                              components.ea());
+				components.sa(), components.er(), components.eg(), components.eb(),
+				components.ea());
 	}
 
 	private static @NotNull ColorComponents getColorComponents(int startColor, int endColor) {
@@ -140,8 +139,8 @@ public class GuiHelper {
 		ColorComponents components = getColorComponents(startColor, endColor);
 
 		drawHorizontalGradientRectangle(buffer, x0, y0, x1, y1, z, components.sr(), components.sg(), components.sb(),
-		                                components.sa(), components.er(), components.eg(), components.eb(),
-		                                components.ea());
+				components.sa(), components.er(), components.eg(), components.eb(),
+				components.ea());
 	}
 
 	public static void drawHorizontalGradientRectangle(BufferBuilder buffer, float x0, float y0, float x1, float y1,
